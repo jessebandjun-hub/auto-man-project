@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
-import { DashboardPage } from './pages/DashboardPage';
+import { ProjectListPage } from './pages/ProjectListPage';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 function App() {
@@ -14,7 +14,8 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           
           <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<DashboardPage />} />
+            <Route path="/projects" element={<ProjectListPage />} />
+            <Route path="/" element={<Navigate to="/projects" replace />} />
           </Route>
           
           <Route path="*" element={<Navigate to="/" replace />} />
