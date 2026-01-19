@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Card, Button, List, Modal, Form, Input, Typography, message } from 'antd';
-import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { projectsApi, type Project } from '../lib/api';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -12,6 +12,7 @@ export const ProjectListPage = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const { logout } = useAuth();
@@ -32,16 +33,34 @@ export const ProjectListPage = () => {
     fetchProjects();
   }, []);
 
-  const handleCreate = async (values: { name: string; description?: string }) => {
+  const handleCreateOrUpdate = async (values: { name: string; description?: string }) => {
     try {
-      await projectsApi.create(values);
-      message.success('Project created');
+      if (editingProject) {
+        await projectsApi.update(editingProject.id, values);
+        message.success('Project updated');
+      } else {
+        await projectsApi.create(values);
+        message.success('Project created');
+      }
       setIsModalVisible(false);
       form.resetFields();
+      setEditingProject(null);
       fetchProjects();
     } catch (error) {
-      message.error('Failed to create project');
+      message.error('Operation failed');
     }
+  };
+
+  const openModal = (project?: Project, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    if (project) {
+      setEditingProject(project);
+      form.setFieldsValue(project);
+    } else {
+      setEditingProject(null);
+      form.resetFields();
+    }
+    setIsModalVisible(true);
   };
 
   const handleDelete = async (id: string, e: React.MouseEvent) => {
@@ -61,7 +80,7 @@ export const ProjectListPage = () => {
         <Title level={2} style={{ margin: 0 }}>我的项目</Title>
         <div style={{ display: 'flex', gap: 10 }}>
           <Button onClick={logout}>退出登录</Button>
-          <Button type="primary" icon={<PlusOutlined />} onClick={() => setIsModalVisible(true)}>
+          <Button type="primary" icon={<PlusOutlined />} onClick={() => openModal()}>
             新建项目
           </Button>
         </div>
@@ -76,7 +95,12 @@ export const ProjectListPage = () => {
             <Card
               hoverable
               title={item.name}
-              extra={<Button type="text" danger icon={<DeleteOutlined />} onClick={(e) => handleDelete(item.id, e)} />}
+              extra={
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <Button type="text" icon={<EditOutlined />} onClick={(e) => openModal(item, e)} />
+                  <Button type="text" danger icon={<DeleteOutlined />} onClick={(e) => handleDelete(item.id, e)} />
+                </div>
+              }
               onClick={() => navigate(`/projects/${item.id}`)}
             >
               <Card.Meta
@@ -97,12 +121,12 @@ export const ProjectListPage = () => {
       />
 
       <Modal
-        title="新建项目"
+        title={editingProject ? '编辑项目' : '新建项目'}
         open={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         onOk={() => form.submit()}
       >
-        <Form form={form} layout="vertical" onFinish={handleCreate}>
+        <Form form={form} layout="vertical" onFinish={handleCreateOrUpdate}>
           <Form.Item name="name" label="项目名称" rules={[{ required: true, message: '请输入项目名称' }]}>
             <Input placeholder="例如：仙侠传" />
           </Form.Item>
