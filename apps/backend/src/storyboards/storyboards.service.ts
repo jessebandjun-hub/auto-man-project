@@ -152,4 +152,54 @@ export class StoryboardsService {
       throw error;
     }
   }
+
+  async generateVideo(id: string, motionPrompt: string) {
+    const storyboard = await this.findOne(id);
+    if (!storyboard) throw new Error('Storyboard not found');
+    if (!storyboard.imageUrl) throw new Error('Storyboard image not generated yet');
+
+    await this.update(id, { status: 'GENERATING' } as any);
+
+    try {
+      const videoUrl = await this.aiService.generateVideo(storyboard.imageUrl, motionPrompt);
+      return await this.update(id, {
+        videoUrl,
+        status: 'DONE',
+      } as any);
+    } catch (error) {
+      await this.update(id, { status: 'DONE' } as any); // Or revert to prev
+      throw error;
+    }
+  }
+
+  async exportVideo(episodeId: string) {
+    // 1. Get all storyboards for the episode
+    const storyboards = await this.findAll(episodeId);
+    // 2. Filter valid video clips
+    const validClips = storyboards.filter(sb => sb.videoUrl);
+    
+    if (validClips.length === 0) {
+      throw new Error('No video clips found for this episode');
+    }
+
+    // Mock Export: In reality, call FFmpeg to concat videos
+    // Return a dummy link representing the final export
+    return {
+      exportUrl: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+      count: validClips.length
+    };
+  }
+
+  async generateTTS(episodeId: string) {
+     const storyboards = await this.findAll(episodeId);
+     let count = 0;
+     for (const sb of storyboards) {
+         if (sb.dialogue && !sb.audioUrl) {
+             const audioUrl = await this.aiService.generateTTS(sb.dialogue);
+             await this.update(sb.id, { audioUrl } as any);
+             count++;
+         }
+     }
+     return { count };
+  }
 }

@@ -41,4 +41,19 @@ export class AiService {
     const text = 'Refined';
     return `https://placehold.co/1024x576?text=${text}: ${encodeURIComponent(instruction.substring(0, 15))}`;
   }
+
+  async generateVideo(imageUrl: string, motionPrompt: string, duration: number = 3): Promise<string> {
+    // Mock AI response (I2V)
+    // In reality, this would call Doubao-Video (doubao-seedance-1-0-pro-fast-251015)
+    // For demo, return a placeholder video URL (or just a text indicator if placeholder video is hard)
+    // Let's return a static image URL that pretends to be a video thumbnail or a dummy mp4 link if possible
+    // Using a sample MP4 link for testing video players
+    return 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'; 
+  }
+
+  async generateTTS(text: string, gender: string = 'Male'): Promise<string> {
+    // Mock AI response (TTS)
+    // Returns a dummy audio URL
+    return 'https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3';
+  }
 }

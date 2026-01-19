@@ -38,4 +38,19 @@ export class StoryboardsController {
   refineImage(@Param('id') id: string, @Body() body: { instruction: string }) {
     return this.storyboardsService.refineImage(id, body.instruction);
   }
+
+  @Post('storyboards/:id/video/generate')
+  generateVideo(@Param('id') id: string, @Body() body: { motionPrompt: string }) {
+    return this.storyboardsService.generateVideo(id, body.motionPrompt);
+  }
+
+  @Post('episodes/:episodeId/export')
+  exportVideo(@Param('episodeId') episodeId: string) {
+    return this.storyboardsService.exportVideo(episodeId);
+  }
+
+  @Post('episodes/:episodeId/tts')
+  generateTTS(@Param('episodeId') episodeId: string) {
+    return this.storyboardsService.generateTTS(episodeId);
+  }
 }

@@ -36,6 +36,12 @@ export const episodesApi = {
   update: (id: string, data: Partial<Episode>) =>
     api.patch<Episode>(`/episodes/${id}`, data).then((res) => res.data),
   delete: (id: string) => api.delete(`/episodes/${id}`),
+  
+  // New export endpoints
+  exportVideo: (episodeId: string) => 
+    api.post<{exportUrl: string, count: number}>(`/episodes/${episodeId}/export`).then((res) => res.data),
+  generateTTS: (episodeId: string) => 
+    api.post<{count: number}>(`/episodes/${episodeId}/tts`).then((res) => res.data),
 };
 
 export const charactersApi = {
@@ -66,6 +72,8 @@ export const storyboardsApi = {
     api.post<Storyboard>(`/storyboards/${id}/image/generate`, { useRefImage }).then((res) => res.data),
   refineImage: (id: string, instruction: string) => 
     api.post<Storyboard>(`/storyboards/${id}/refine`, { instruction }).then((res) => res.data),
+  generateVideo: (id: string, motionPrompt: string) => 
+    api.post<Storyboard>(`/storyboards/${id}/video/generate`, { motionPrompt }).then((res) => res.data),
 };
 
 export interface Project {
@@ -109,6 +117,8 @@ export interface Storyboard {
   dialogue?: string;
   prompt?: string;
   imageUrl?: string;
+  videoUrl?: string;
+  audioUrl?: string;
   status: 'DRAFT' | 'GENERATING' | 'DONE';
   createdAt: string;
   updatedAt: string;
