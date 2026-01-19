@@ -392,7 +392,9 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Project: 'Project',
-  Episode: 'Episode'
+  Episode: 'Episode',
+  Character: 'Character',
+  Storyboard: 'Storyboard'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -408,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "project" | "episode"
+    modelProps: "user" | "project" | "episode" | "character" | "storyboard"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -634,6 +636,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Character: {
+      payload: Prisma.$CharacterPayload<ExtArgs>
+      fields: Prisma.CharacterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CharacterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CharacterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CharacterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CharacterPayload>
+        }
+        findFirst: {
+          args: Prisma.CharacterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CharacterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CharacterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CharacterPayload>
+        }
+        findMany: {
+          args: Prisma.CharacterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CharacterPayload>[]
+        }
+        create: {
+          args: Prisma.CharacterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CharacterPayload>
+        }
+        createMany: {
+          args: Prisma.CharacterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CharacterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CharacterPayload>[]
+        }
+        delete: {
+          args: Prisma.CharacterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CharacterPayload>
+        }
+        update: {
+          args: Prisma.CharacterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CharacterPayload>
+        }
+        deleteMany: {
+          args: Prisma.CharacterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CharacterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CharacterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CharacterPayload>[]
+        }
+        upsert: {
+          args: Prisma.CharacterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CharacterPayload>
+        }
+        aggregate: {
+          args: Prisma.CharacterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCharacter>
+        }
+        groupBy: {
+          args: Prisma.CharacterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CharacterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CharacterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CharacterCountAggregateOutputType> | number
+        }
+      }
+    }
+    Storyboard: {
+      payload: Prisma.$StoryboardPayload<ExtArgs>
+      fields: Prisma.StoryboardFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StoryboardFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryboardPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StoryboardFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryboardPayload>
+        }
+        findFirst: {
+          args: Prisma.StoryboardFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryboardPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StoryboardFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryboardPayload>
+        }
+        findMany: {
+          args: Prisma.StoryboardFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryboardPayload>[]
+        }
+        create: {
+          args: Prisma.StoryboardCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryboardPayload>
+        }
+        createMany: {
+          args: Prisma.StoryboardCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StoryboardCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryboardPayload>[]
+        }
+        delete: {
+          args: Prisma.StoryboardDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryboardPayload>
+        }
+        update: {
+          args: Prisma.StoryboardUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryboardPayload>
+        }
+        deleteMany: {
+          args: Prisma.StoryboardDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StoryboardUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StoryboardUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryboardPayload>[]
+        }
+        upsert: {
+          args: Prisma.StoryboardUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryboardPayload>
+        }
+        aggregate: {
+          args: Prisma.StoryboardAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStoryboard>
+        }
+        groupBy: {
+          args: Prisma.StoryboardGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StoryboardGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StoryboardCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StoryboardCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -688,7 +838,8 @@ export const ProjectScalarFieldEnum = {
   description: 'description',
   userId: 'userId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  script: 'script'
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
@@ -704,6 +855,39 @@ export const EpisodeScalarFieldEnum = {
 } as const
 
 export type EpisodeScalarFieldEnum = (typeof EpisodeScalarFieldEnum)[keyof typeof EpisodeScalarFieldEnum]
+
+
+export const CharacterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  tags: 'tags',
+  avatarUrl: 'avatarUrl',
+  projectId: 'projectId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CharacterScalarFieldEnum = (typeof CharacterScalarFieldEnum)[keyof typeof CharacterScalarFieldEnum]
+
+
+export const StoryboardScalarFieldEnum = {
+  id: 'id',
+  episodeId: 'episodeId',
+  sortOrder: 'sortOrder',
+  shotType: 'shotType',
+  action: 'action',
+  dialogue: 'dialogue',
+  prompt: 'prompt',
+  imageUrl: 'imageUrl',
+  videoUrl: 'videoUrl',
+  audioUrl: 'audioUrl',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StoryboardScalarFieldEnum = (typeof StoryboardScalarFieldEnum)[keyof typeof StoryboardScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -845,6 +1029,8 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   project?: Prisma.ProjectOmit
   episode?: Prisma.EpisodeOmit
+  character?: Prisma.CharacterOmit
+  storyboard?: Prisma.StoryboardOmit
 }
 
 /* Types for Logging */

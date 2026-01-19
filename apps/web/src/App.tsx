@@ -6,6 +6,7 @@ import { ProjectListPage } from './pages/ProjectListPage';
 import { ProjectLayout } from './pages/ProjectLayout';
 import { ProjectSettingsPage } from './pages/ProjectSettingsPage';
 import { ProjectEpisodesPage } from './pages/ProjectEpisodesPage';
+import { AssetStudioPage } from './pages/AssetStudioPage';
 import { ProjectStoryboardPage } from './pages/ProjectStoryboardPage';
 import { ProjectEditingPage } from './pages/ProjectEditingPage';
 import { ProtectedRoute } from './components/ProtectedRoute';
@@ -23,6 +24,7 @@ function App() {
             <Route path="/projects/:projectId" element={<ProjectLayout />}>
               <Route index element={<Navigate to="episodes" replace />} />
               <Route path="settings" element={<ProjectSettingsPage />} />
+              <Route path="assets" element={<AssetStudioPage />} />
               <Route path="episodes" element={<ProjectEpisodesPage />} />
               <Route path="storyboard" element={<ProjectStoryboardPage />} />
               <Route path="editing" element={<ProjectEditingPage />} />

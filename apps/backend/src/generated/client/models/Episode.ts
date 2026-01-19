@@ -225,6 +225,7 @@ export type EpisodeWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Episode"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Episode"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  storyboards?: Prisma.StoryboardListRelationFilter
 }
 
 export type EpisodeOrderByWithRelationInput = {
@@ -235,6 +236,7 @@ export type EpisodeOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   project?: Prisma.ProjectOrderByWithRelationInput
+  storyboards?: Prisma.StoryboardOrderByRelationAggregateInput
 }
 
 export type EpisodeWhereUniqueInput = Prisma.AtLeast<{
@@ -248,6 +250,7 @@ export type EpisodeWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Episode"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Episode"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  storyboards?: Prisma.StoryboardListRelationFilter
 }, "id">
 
 export type EpisodeOrderByWithAggregationInput = {
@@ -283,6 +286,7 @@ export type EpisodeCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutEpisodesInput
+  storyboards?: Prisma.StoryboardCreateNestedManyWithoutEpisodeInput
 }
 
 export type EpisodeUncheckedCreateInput = {
@@ -292,6 +296,7 @@ export type EpisodeUncheckedCreateInput = {
   projectId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  storyboards?: Prisma.StoryboardUncheckedCreateNestedManyWithoutEpisodeInput
 }
 
 export type EpisodeUpdateInput = {
@@ -301,6 +306,7 @@ export type EpisodeUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutEpisodesNestedInput
+  storyboards?: Prisma.StoryboardUpdateManyWithoutEpisodeNestedInput
 }
 
 export type EpisodeUncheckedUpdateInput = {
@@ -310,6 +316,7 @@ export type EpisodeUncheckedUpdateInput = {
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  storyboards?: Prisma.StoryboardUncheckedUpdateManyWithoutEpisodeNestedInput
 }
 
 export type EpisodeCreateManyInput = {
@@ -383,6 +390,11 @@ export type EpisodeSumOrderByAggregateInput = {
   sortOrder?: Prisma.SortOrder
 }
 
+export type EpisodeScalarRelationFilter = {
+  is?: Prisma.EpisodeWhereInput
+  isNot?: Prisma.EpisodeWhereInput
+}
+
 export type EpisodeCreateNestedManyWithoutProjectInput = {
   create?: Prisma.XOR<Prisma.EpisodeCreateWithoutProjectInput, Prisma.EpisodeUncheckedCreateWithoutProjectInput> | Prisma.EpisodeCreateWithoutProjectInput[] | Prisma.EpisodeUncheckedCreateWithoutProjectInput[]
   connectOrCreate?: Prisma.EpisodeCreateOrConnectWithoutProjectInput | Prisma.EpisodeCreateOrConnectWithoutProjectInput[]
@@ -425,12 +437,27 @@ export type EpisodeUncheckedUpdateManyWithoutProjectNestedInput = {
   deleteMany?: Prisma.EpisodeScalarWhereInput | Prisma.EpisodeScalarWhereInput[]
 }
 
+export type EpisodeCreateNestedOneWithoutStoryboardsInput = {
+  create?: Prisma.XOR<Prisma.EpisodeCreateWithoutStoryboardsInput, Prisma.EpisodeUncheckedCreateWithoutStoryboardsInput>
+  connectOrCreate?: Prisma.EpisodeCreateOrConnectWithoutStoryboardsInput
+  connect?: Prisma.EpisodeWhereUniqueInput
+}
+
+export type EpisodeUpdateOneRequiredWithoutStoryboardsNestedInput = {
+  create?: Prisma.XOR<Prisma.EpisodeCreateWithoutStoryboardsInput, Prisma.EpisodeUncheckedCreateWithoutStoryboardsInput>
+  connectOrCreate?: Prisma.EpisodeCreateOrConnectWithoutStoryboardsInput
+  upsert?: Prisma.EpisodeUpsertWithoutStoryboardsInput
+  connect?: Prisma.EpisodeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EpisodeUpdateToOneWithWhereWithoutStoryboardsInput, Prisma.EpisodeUpdateWithoutStoryboardsInput>, Prisma.EpisodeUncheckedUpdateWithoutStoryboardsInput>
+}
+
 export type EpisodeCreateWithoutProjectInput = {
   id?: string
   title: string
   sortOrder: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  storyboards?: Prisma.StoryboardCreateNestedManyWithoutEpisodeInput
 }
 
 export type EpisodeUncheckedCreateWithoutProjectInput = {
@@ -439,6 +466,7 @@ export type EpisodeUncheckedCreateWithoutProjectInput = {
   sortOrder: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  storyboards?: Prisma.StoryboardUncheckedCreateNestedManyWithoutEpisodeInput
 }
 
 export type EpisodeCreateOrConnectWithoutProjectInput = {
@@ -478,6 +506,58 @@ export type EpisodeScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Episode"> | Date | string
 }
 
+export type EpisodeCreateWithoutStoryboardsInput = {
+  id?: string
+  title: string
+  sortOrder: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  project: Prisma.ProjectCreateNestedOneWithoutEpisodesInput
+}
+
+export type EpisodeUncheckedCreateWithoutStoryboardsInput = {
+  id?: string
+  title: string
+  sortOrder: number
+  projectId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type EpisodeCreateOrConnectWithoutStoryboardsInput = {
+  where: Prisma.EpisodeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EpisodeCreateWithoutStoryboardsInput, Prisma.EpisodeUncheckedCreateWithoutStoryboardsInput>
+}
+
+export type EpisodeUpsertWithoutStoryboardsInput = {
+  update: Prisma.XOR<Prisma.EpisodeUpdateWithoutStoryboardsInput, Prisma.EpisodeUncheckedUpdateWithoutStoryboardsInput>
+  create: Prisma.XOR<Prisma.EpisodeCreateWithoutStoryboardsInput, Prisma.EpisodeUncheckedCreateWithoutStoryboardsInput>
+  where?: Prisma.EpisodeWhereInput
+}
+
+export type EpisodeUpdateToOneWithWhereWithoutStoryboardsInput = {
+  where?: Prisma.EpisodeWhereInput
+  data: Prisma.XOR<Prisma.EpisodeUpdateWithoutStoryboardsInput, Prisma.EpisodeUncheckedUpdateWithoutStoryboardsInput>
+}
+
+export type EpisodeUpdateWithoutStoryboardsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneRequiredWithoutEpisodesNestedInput
+}
+
+export type EpisodeUncheckedUpdateWithoutStoryboardsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type EpisodeCreateManyProjectInput = {
   id?: string
   title: string
@@ -492,6 +572,7 @@ export type EpisodeUpdateWithoutProjectInput = {
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  storyboards?: Prisma.StoryboardUpdateManyWithoutEpisodeNestedInput
 }
 
 export type EpisodeUncheckedUpdateWithoutProjectInput = {
@@ -500,6 +581,7 @@ export type EpisodeUncheckedUpdateWithoutProjectInput = {
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  storyboards?: Prisma.StoryboardUncheckedUpdateManyWithoutEpisodeNestedInput
 }
 
 export type EpisodeUncheckedUpdateManyWithoutProjectInput = {
@@ -511,6 +593,35 @@ export type EpisodeUncheckedUpdateManyWithoutProjectInput = {
 }
 
 
+/**
+ * Count Type EpisodeCountOutputType
+ */
+
+export type EpisodeCountOutputType = {
+  storyboards: number
+}
+
+export type EpisodeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  storyboards?: boolean | EpisodeCountOutputTypeCountStoryboardsArgs
+}
+
+/**
+ * EpisodeCountOutputType without action
+ */
+export type EpisodeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EpisodeCountOutputType
+   */
+  select?: Prisma.EpisodeCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * EpisodeCountOutputType without action
+ */
+export type EpisodeCountOutputTypeCountStoryboardsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StoryboardWhereInput
+}
+
 
 export type EpisodeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -520,6 +631,8 @@ export type EpisodeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  storyboards?: boolean | Prisma.Episode$storyboardsArgs<ExtArgs>
+  _count?: boolean | Prisma.EpisodeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["episode"]>
 
 export type EpisodeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -554,6 +667,8 @@ export type EpisodeSelectScalar = {
 export type EpisodeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "sortOrder" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["episode"]>
 export type EpisodeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  storyboards?: boolean | Prisma.Episode$storyboardsArgs<ExtArgs>
+  _count?: boolean | Prisma.EpisodeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EpisodeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
@@ -566,6 +681,7 @@ export type $EpisodePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Episode"
   objects: {
     project: Prisma.$ProjectPayload<ExtArgs>
+    storyboards: Prisma.$StoryboardPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -969,6 +1085,7 @@ readonly fields: EpisodeFieldRefs;
 export interface Prisma__EpisodeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   project<T extends Prisma.ProjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  storyboards<T extends Prisma.Episode$storyboardsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Episode$storyboardsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StoryboardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1395,6 +1512,30 @@ export type EpisodeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Episodes to delete.
    */
   limit?: number
+}
+
+/**
+ * Episode.storyboards
+ */
+export type Episode$storyboardsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Storyboard
+   */
+  select?: Prisma.StoryboardSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Storyboard
+   */
+  omit?: Prisma.StoryboardOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StoryboardInclude<ExtArgs> | null
+  where?: Prisma.StoryboardWhereInput
+  orderBy?: Prisma.StoryboardOrderByWithRelationInput | Prisma.StoryboardOrderByWithRelationInput[]
+  cursor?: Prisma.StoryboardWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StoryboardScalarFieldEnum | Prisma.StoryboardScalarFieldEnum[]
 }
 
 /**

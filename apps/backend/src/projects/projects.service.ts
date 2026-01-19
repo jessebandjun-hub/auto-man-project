@@ -43,6 +43,21 @@ export class ProjectsService {
     });
   }
 
+  updateScript(id: string, script: string) {
+    return this.prisma.project.update({
+      where: { id },
+      data: { script },
+    });
+  }
+
+  async getScript(id: string) {
+    const project = await this.prisma.project.findUnique({
+      where: { id },
+      select: { script: true },
+    });
+    return project?.script || '';
+  }
+
   remove(id: string) {
     return this.prisma.project.delete({
       where: { id },

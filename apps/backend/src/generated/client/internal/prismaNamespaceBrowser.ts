@@ -51,7 +51,9 @@ export const AnyNull = runtime.objectEnumValues.instances.AnyNull
 export const ModelName = {
   User: 'User',
   Project: 'Project',
-  Episode: 'Episode'
+  Episode: 'Episode',
+  Character: 'Character',
+  Storyboard: 'Storyboard'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -85,7 +87,8 @@ export const ProjectScalarFieldEnum = {
   description: 'description',
   userId: 'userId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  script: 'script'
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
@@ -101,6 +104,39 @@ export const EpisodeScalarFieldEnum = {
 } as const
 
 export type EpisodeScalarFieldEnum = (typeof EpisodeScalarFieldEnum)[keyof typeof EpisodeScalarFieldEnum]
+
+
+export const CharacterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  tags: 'tags',
+  avatarUrl: 'avatarUrl',
+  projectId: 'projectId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CharacterScalarFieldEnum = (typeof CharacterScalarFieldEnum)[keyof typeof CharacterScalarFieldEnum]
+
+
+export const StoryboardScalarFieldEnum = {
+  id: 'id',
+  episodeId: 'episodeId',
+  sortOrder: 'sortOrder',
+  shotType: 'shotType',
+  action: 'action',
+  dialogue: 'dialogue',
+  prompt: 'prompt',
+  imageUrl: 'imageUrl',
+  videoUrl: 'videoUrl',
+  audioUrl: 'audioUrl',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StoryboardScalarFieldEnum = (typeof StoryboardScalarFieldEnum)[keyof typeof StoryboardScalarFieldEnum]
 
 
 export const SortOrder = {

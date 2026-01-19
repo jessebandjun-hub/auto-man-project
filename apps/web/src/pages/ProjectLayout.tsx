@@ -6,6 +6,7 @@ import {
   AppstoreOutlined,
   VideoCameraOutlined,
   ArrowLeftOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { projectsApi, type Project } from '../lib/api';
@@ -61,6 +62,11 @@ export const ProjectLayout = () => {
               key: 'settings',
               icon: <SettingOutlined />,
               label: <Link to={`/projects/${projectId}/settings`}>项目设定</Link>,
+            },
+            {
+              key: 'assets',
+              icon: <UserOutlined />,
+              label: <Link to={`/projects/${projectId}/assets`}>设定室</Link>,
             },
             {
               key: 'episodes',

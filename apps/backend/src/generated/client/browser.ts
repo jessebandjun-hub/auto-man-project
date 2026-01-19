@@ -32,3 +32,13 @@ export type Project = Prisma.ProjectModel
  * 
  */
 export type Episode = Prisma.EpisodeModel
+/**
+ * Model Character
+ * 
+ */
+export type Character = Prisma.CharacterModel
+/**
+ * Model Storyboard
+ * 
+ */
+export type Storyboard = Prisma.StoryboardModel

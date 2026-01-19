@@ -11,4 +11,6 @@
 export type * from './models/User'
 export type * from './models/Project'
 export type * from './models/Episode'
+export type * from './models/Character'
+export type * from './models/Storyboard'
 export type * from './commonInputTypes'

@@ -41,6 +41,7 @@ export type ProjectMinAggregateOutputType = {
   userId: number | null
   createdAt: Date | null
   updatedAt: Date | null
+  script: string | null
 }
 
 export type ProjectMaxAggregateOutputType = {
@@ -50,6 +51,7 @@ export type ProjectMaxAggregateOutputType = {
   userId: number | null
   createdAt: Date | null
   updatedAt: Date | null
+  script: string | null
 }
 
 export type ProjectCountAggregateOutputType = {
@@ -59,6 +61,7 @@ export type ProjectCountAggregateOutputType = {
   userId: number
   createdAt: number
   updatedAt: number
+  script: number
   _all: number
 }
 
@@ -78,6 +81,7 @@ export type ProjectMinAggregateInputType = {
   userId?: true
   createdAt?: true
   updatedAt?: true
+  script?: true
 }
 
 export type ProjectMaxAggregateInputType = {
@@ -87,6 +91,7 @@ export type ProjectMaxAggregateInputType = {
   userId?: true
   createdAt?: true
   updatedAt?: true
+  script?: true
 }
 
 export type ProjectCountAggregateInputType = {
@@ -96,6 +101,7 @@ export type ProjectCountAggregateInputType = {
   userId?: true
   createdAt?: true
   updatedAt?: true
+  script?: true
   _all?: true
 }
 
@@ -192,6 +198,7 @@ export type ProjectGroupByOutputType = {
   userId: number
   createdAt: Date
   updatedAt: Date
+  script: string | null
   _count: ProjectCountAggregateOutputType | null
   _avg: ProjectAvgAggregateOutputType | null
   _sum: ProjectSumAggregateOutputType | null
@@ -224,8 +231,10 @@ export type ProjectWhereInput = {
   userId?: Prisma.IntFilter<"Project"> | number
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
+  script?: Prisma.StringNullableFilter<"Project"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   episodes?: Prisma.EpisodeListRelationFilter
+  characters?: Prisma.CharacterListRelationFilter
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -235,8 +244,10 @@ export type ProjectOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  script?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   episodes?: Prisma.EpisodeOrderByRelationAggregateInput
+  characters?: Prisma.CharacterOrderByRelationAggregateInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -249,8 +260,10 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.IntFilter<"Project"> | number
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
+  script?: Prisma.StringNullableFilter<"Project"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   episodes?: Prisma.EpisodeListRelationFilter
+  characters?: Prisma.CharacterListRelationFilter
 }, "id">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -260,6 +273,7 @@ export type ProjectOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  script?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ProjectCountOrderByAggregateInput
   _avg?: Prisma.ProjectAvgOrderByAggregateInput
   _max?: Prisma.ProjectMaxOrderByAggregateInput
@@ -277,6 +291,7 @@ export type ProjectScalarWhereWithAggregatesInput = {
   userId?: Prisma.IntWithAggregatesFilter<"Project"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Project"> | Date | string
+  script?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
 }
 
 export type ProjectCreateInput = {
@@ -285,8 +300,10 @@ export type ProjectCreateInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  script?: string | null
   user: Prisma.UserCreateNestedOneWithoutProjectsInput
   episodes?: Prisma.EpisodeCreateNestedManyWithoutProjectInput
+  characters?: Prisma.CharacterCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -296,7 +313,9 @@ export type ProjectUncheckedCreateInput = {
   userId: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  script?: string | null
   episodes?: Prisma.EpisodeUncheckedCreateNestedManyWithoutProjectInput
+  characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUpdateInput = {
@@ -305,8 +324,10 @@ export type ProjectUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  script?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
   episodes?: Prisma.EpisodeUpdateManyWithoutProjectNestedInput
+  characters?: Prisma.CharacterUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -316,7 +337,9 @@ export type ProjectUncheckedUpdateInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  script?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   episodes?: Prisma.EpisodeUncheckedUpdateManyWithoutProjectNestedInput
+  characters?: Prisma.CharacterUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyInput = {
@@ -326,6 +349,7 @@ export type ProjectCreateManyInput = {
   userId: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  script?: string | null
 }
 
 export type ProjectUpdateManyMutationInput = {
@@ -334,6 +358,7 @@ export type ProjectUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  script?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ProjectUncheckedUpdateManyInput = {
@@ -343,6 +368,7 @@ export type ProjectUncheckedUpdateManyInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  script?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ProjectListRelationFilter = {
@@ -362,6 +388,7 @@ export type ProjectCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  script?: Prisma.SortOrder
 }
 
 export type ProjectAvgOrderByAggregateInput = {
@@ -375,6 +402,7 @@ export type ProjectMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  script?: Prisma.SortOrder
 }
 
 export type ProjectMinOrderByAggregateInput = {
@@ -384,6 +412,7 @@ export type ProjectMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  script?: Prisma.SortOrder
 }
 
 export type ProjectSumOrderByAggregateInput = {
@@ -451,13 +480,29 @@ export type ProjectUpdateOneRequiredWithoutEpisodesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutEpisodesInput, Prisma.ProjectUpdateWithoutEpisodesInput>, Prisma.ProjectUncheckedUpdateWithoutEpisodesInput>
 }
 
+export type ProjectCreateNestedOneWithoutCharactersInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutCharactersInput, Prisma.ProjectUncheckedCreateWithoutCharactersInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutCharactersInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutCharactersNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutCharactersInput, Prisma.ProjectUncheckedCreateWithoutCharactersInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutCharactersInput
+  upsert?: Prisma.ProjectUpsertWithoutCharactersInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutCharactersInput, Prisma.ProjectUpdateWithoutCharactersInput>, Prisma.ProjectUncheckedUpdateWithoutCharactersInput>
+}
+
 export type ProjectCreateWithoutUserInput = {
   id?: string
   name: string
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  script?: string | null
   episodes?: Prisma.EpisodeCreateNestedManyWithoutProjectInput
+  characters?: Prisma.CharacterCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutUserInput = {
@@ -466,7 +511,9 @@ export type ProjectUncheckedCreateWithoutUserInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  script?: string | null
   episodes?: Prisma.EpisodeUncheckedCreateNestedManyWithoutProjectInput
+  characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutUserInput = {
@@ -504,6 +551,7 @@ export type ProjectScalarWhereInput = {
   userId?: Prisma.IntFilter<"Project"> | number
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
+  script?: Prisma.StringNullableFilter<"Project"> | string | null
 }
 
 export type ProjectCreateWithoutEpisodesInput = {
@@ -512,7 +560,9 @@ export type ProjectCreateWithoutEpisodesInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  script?: string | null
   user: Prisma.UserCreateNestedOneWithoutProjectsInput
+  characters?: Prisma.CharacterCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutEpisodesInput = {
@@ -522,6 +572,8 @@ export type ProjectUncheckedCreateWithoutEpisodesInput = {
   userId: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  script?: string | null
+  characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutEpisodesInput = {
@@ -546,7 +598,9 @@ export type ProjectUpdateWithoutEpisodesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  script?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
+  characters?: Prisma.CharacterUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutEpisodesInput = {
@@ -556,6 +610,68 @@ export type ProjectUncheckedUpdateWithoutEpisodesInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  script?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  characters?: Prisma.CharacterUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutCharactersInput = {
+  id?: string
+  name: string
+  description?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  script?: string | null
+  user: Prisma.UserCreateNestedOneWithoutProjectsInput
+  episodes?: Prisma.EpisodeCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutCharactersInput = {
+  id?: string
+  name: string
+  description?: string | null
+  userId: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  script?: string | null
+  episodes?: Prisma.EpisodeUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutCharactersInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutCharactersInput, Prisma.ProjectUncheckedCreateWithoutCharactersInput>
+}
+
+export type ProjectUpsertWithoutCharactersInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutCharactersInput, Prisma.ProjectUncheckedUpdateWithoutCharactersInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutCharactersInput, Prisma.ProjectUncheckedCreateWithoutCharactersInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutCharactersInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutCharactersInput, Prisma.ProjectUncheckedUpdateWithoutCharactersInput>
+}
+
+export type ProjectUpdateWithoutCharactersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  script?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
+  episodes?: Prisma.EpisodeUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutCharactersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  script?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  episodes?: Prisma.EpisodeUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyUserInput = {
@@ -564,6 +680,7 @@ export type ProjectCreateManyUserInput = {
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  script?: string | null
 }
 
 export type ProjectUpdateWithoutUserInput = {
@@ -572,7 +689,9 @@ export type ProjectUpdateWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  script?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   episodes?: Prisma.EpisodeUpdateManyWithoutProjectNestedInput
+  characters?: Prisma.CharacterUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutUserInput = {
@@ -581,7 +700,9 @@ export type ProjectUncheckedUpdateWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  script?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   episodes?: Prisma.EpisodeUncheckedUpdateManyWithoutProjectNestedInput
+  characters?: Prisma.CharacterUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutUserInput = {
@@ -590,6 +711,7 @@ export type ProjectUncheckedUpdateManyWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  script?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -599,10 +721,12 @@ export type ProjectUncheckedUpdateManyWithoutUserInput = {
 
 export type ProjectCountOutputType = {
   episodes: number
+  characters: number
 }
 
 export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   episodes?: boolean | ProjectCountOutputTypeCountEpisodesArgs
+  characters?: boolean | ProjectCountOutputTypeCountCharactersArgs
 }
 
 /**
@@ -622,6 +746,13 @@ export type ProjectCountOutputTypeCountEpisodesArgs<ExtArgs extends runtime.Type
   where?: Prisma.EpisodeWhereInput
 }
 
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountCharactersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CharacterWhereInput
+}
+
 
 export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -630,8 +761,10 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  script?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   episodes?: boolean | Prisma.Project$episodesArgs<ExtArgs>
+  characters?: boolean | Prisma.Project$charactersArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -642,6 +775,7 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  script?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -652,6 +786,7 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  script?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -662,12 +797,14 @@ export type ProjectSelectScalar = {
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  script?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "userId" | "createdAt" | "updatedAt" | "script", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   episodes?: boolean | Prisma.Project$episodesArgs<ExtArgs>
+  characters?: boolean | Prisma.Project$charactersArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -682,6 +819,7 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     episodes: Prisma.$EpisodePayload<ExtArgs>[]
+    characters: Prisma.$CharacterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -690,6 +828,7 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     userId: number
     createdAt: Date
     updatedAt: Date
+    script: string | null
   }, ExtArgs["result"]["project"]>
   composites: {}
 }
@@ -1086,6 +1225,7 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   episodes<T extends Prisma.Project$episodesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$episodesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EpisodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  characters<T extends Prisma.Project$charactersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$charactersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1121,6 +1261,7 @@ export interface ProjectFieldRefs {
   readonly userId: Prisma.FieldRef<"Project", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Project", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Project", 'DateTime'>
+  readonly script: Prisma.FieldRef<"Project", 'String'>
 }
     
 
@@ -1536,6 +1677,30 @@ export type Project$episodesArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.EpisodeScalarFieldEnum | Prisma.EpisodeScalarFieldEnum[]
+}
+
+/**
+ * Project.characters
+ */
+export type Project$charactersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Character
+   */
+  select?: Prisma.CharacterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Character
+   */
+  omit?: Prisma.CharacterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CharacterInclude<ExtArgs> | null
+  where?: Prisma.CharacterWhereInput
+  orderBy?: Prisma.CharacterOrderByWithRelationInput | Prisma.CharacterOrderByWithRelationInput[]
+  cursor?: Prisma.CharacterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CharacterScalarFieldEnum | Prisma.CharacterScalarFieldEnum[]
 }
 
 /**
